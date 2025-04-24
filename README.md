@@ -20,6 +20,7 @@ A modern web application for managing social media profiles and content, built w
 - React Router
 - Styled Components
 - React Icons
+- Firebase Auth
 
 ## Getting Started
 
