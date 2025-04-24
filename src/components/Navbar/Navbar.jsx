@@ -213,13 +213,21 @@ const NavLink = ({ href, children }) => {
 
 const Navbar = () => {
   const { isDark } = useContext(ThemeContext);
-  const { userLoggedIn } = useAuth();
+  const { userLoggedIn, currentUser } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const location = useLocation();
 
   // Check if we're on an auth page (login or signup)
   const isAuthPage = ['/login', '/signup', '/forgot-password'].includes(location.pathname);
+
+  // Get the profile picture URL
+  const getProfilePicture = () => {
+    if (currentUser?.photoURL) {
+      return currentUser.photoURL;
+    }
+    return "https://i.pravatar.cc/150?img=1"; // Default avatar
+  };
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-6">
@@ -286,7 +294,7 @@ const Navbar = () => {
                     className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border-2 border-purple-500 hover:border-purple-600 transition-colors duration-200"
                   >
                     <img
-                      src="https://i.pravatar.cc/150?img=1"
+                      src={getProfilePicture()}
                       alt="Profile"
                       className="w-full h-full object-cover"
                     />
