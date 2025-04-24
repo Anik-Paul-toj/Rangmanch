@@ -229,6 +229,14 @@ const Navbar = () => {
     return "https://i.pravatar.cc/150?img=1"; // Default avatar
   };
 
+  // Get user's first name
+  const getFirstName = () => {
+    if (currentUser?.displayName) {
+      return currentUser.displayName.split(' ')[0];
+    }
+    return 'User';
+  };
+
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-6">
       <motion.div
@@ -288,7 +296,10 @@ const Navbar = () => {
                   Login / Sign Up
                 </Link>
               ) : (
-                <div className="relative">
+                <div className="relative flex items-center gap-3">
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">
+                    Hey, {getFirstName()}
+                  </span>
                   <button
                     onClick={() => setIsProfileOpen(true)}
                     className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border-2 border-purple-500 hover:border-purple-600 transition-colors duration-200"
